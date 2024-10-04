@@ -55,8 +55,11 @@ export class AlgoritmoGenetico {
         return [pai1, pai2];
     }
 
-    crossover(pai1: Besouro, pai2: Besouro): Besouro {
-        return { r: pai1.r, g: pai2.g, b: pai2.b, aptidao: 0 };
+    crossover(pai1: Besouro, pai2: Besouro): [Besouro, Besouro] {
+        return [
+            { r: pai1.r, g: pai2.g, b: pai2.b, aptidao: 0 },
+            { r: pai2.r, g: pai1.g, b: pai1.b, aptidao: 0 }
+        ];
     }
 
     mutacao(individuo: Besouro, taxaMutacao: number): Besouro {

@@ -15,8 +15,15 @@ const PopulationDisplay: React.FC<PopulationDisplayProps> = ({ populacao }) => {
                 const rgbColor = `rgb(${individuo.r}, ${individuo.g}, ${individuo.b})`;
 
                 return (
-                    <div key={index} style={{ backgroundColor: rgbColor }}>
-                        <img src={besouro} alt="Besouro" />
+                    <div>
+                        <div key={index} style={{ backgroundColor: rgbColor }}>
+                            <img src={besouro} alt="Besouro" />
+                        </div>
+                        
+                        <small>
+                            RGB({individuo.r},{individuo.g},{individuo.b})
+                            Aptidão: {individuo.aptidao.toFixed(3).replace('.', ',')}
+                        </small>
                     </div>
                 );                
             })}

@@ -31,28 +31,24 @@ function App() {
     setPopulacoes([ag.ultimaPopulacao]);
 
     for (let i = 1; i <= GERACOES; i++) {
-      console.log(GERACOES);
+
+      const elite = Math.ceil(ag.tamanhoPopulacao / 3);
+      const filhosNecessarios = ag.tamanhoPopulacao - elite;
+
       const filhos: Besouro[] = [];
 
-      // Determina que a quantidade de filhos criados deve ser 2/3 da população
-      const filhosQuantidade = Math.floor((ag.tamanhoPopulacao * 2) / 3);
-
-      // Gera filhos até atingir a quantidade desejada
-      for (let j = 0; j < filhosQuantidade; j++) {
-          // Seleciona dois pais usando o método de seleção
+      for (let j = 0; filhos.length < filhosNecessarios; j++) {
           const [pai1, pai2] = ag.selecao();
+          let [filho1, filho2] = ag.crossover(pai1, pai2);
+          filho1 = ag.mutacao(filho1, TAXA || 0.1);
+          filho2 = ag.mutacao(filho2, TAXA || 0.1);
 
-          // Realiza o crossover para criar um novo filho
-          let filho = ag.crossover(pai1, pai2);
-
-          // Aplica a mutação ao filho gerado
-          filho = ag.mutacao(filho, TAXA || 0.1);
-
-          // Adiciona o filho à lista de filhos
-          filhos.push(filho);
+          // Adiciona os filhos até atingir a quantidade necessária
+          if (filhos.length < filhosNecessarios) filhos.push(filho1);
+          if (filhos.length < filhosNecessarios) filhos.push(filho2);
       }
 
-      // Avalia a nova população com os filhos
+      // Gera nova população com a elite e os filhos
       ag.gerarNovaPopulacao(filhos);
       ag.avaliacao();
 

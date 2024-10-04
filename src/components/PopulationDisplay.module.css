@@ -5,13 +5,27 @@
 
     div {
         display: flex;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+        flex-direction: column;
+        align-items: center;
+
+        div {
+            border-radius: 50%;
+            margin-bottom: 1rem;
+
+            img {
+                width: 50px;
+                height: 50px;
+            }
+        }
 
         small {
             font-size: 1rem;
             margin-left: .5rem;
+            background-color: black;
+            border-radius: 15px;
+            width: 120px;
+            padding: .5rem;
+            color: white;
         }
     }
 }
