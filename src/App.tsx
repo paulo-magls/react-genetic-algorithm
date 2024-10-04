@@ -79,7 +79,9 @@ function App() {
       {populacoes.map((populacao, index) => (
         <React.Fragment key={index}>
           <h1>{ index != 0 ? `Geração ${index}` : 'População Inicial' }</h1>
-          <PopulationDisplay populacao={populacao} />
+          <PopulationDisplay 
+            populacao={populacao.sort((a, b) => b.aptidao - a.aptidao)}
+          />
         </React.Fragment>
       ))}
     </div>

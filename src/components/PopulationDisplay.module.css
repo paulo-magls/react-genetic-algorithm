@@ -21,9 +21,9 @@
         small {
             font-size: 1rem;
             margin-left: .5rem;
-            background-color: black;
+            background-color: rgb(21, 21, 21);
             border-radius: 15px;
-            width: 120px;
+            width: 140px;
             padding: .5rem;
             color: white;
         }

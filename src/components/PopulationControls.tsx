@@ -23,7 +23,7 @@ const PopulationControls: React.FC<PopulationControlsProps> = ({
     isGenerating
 }) => (
     <div className={classes.population_controls}>
-        <h1>Genetic Algorithm Visualiser</h1>
+        <h1>Genetic Algorithm Visualizer</h1>
 
         <p>
             <label htmlFor='tamanho'>Tamanho da População: </label>
@@ -57,6 +57,7 @@ const PopulationControls: React.FC<PopulationControlsProps> = ({
                 id='taxa'
                 type='number'
                 value={taxa}
+                min='0.1'
                 placeholder='Padrão: 10'
                 onChange={(e) => setTaxa(e.target.value)}
                 disabled={isGenerating}
