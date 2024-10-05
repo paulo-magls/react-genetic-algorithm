@@ -22,6 +22,7 @@ const PopulationDisplay: React.FC<PopulationDisplayProps> = ({ populacao }) => {
                         
                         <small>
                             RGB({individuo.r}, {individuo.g}, {individuo.b})
+                            <br></br>
                             Aptidão: {individuo.aptidao.toFixed(5).replace('.', ',')}
                         </small>
                     </div>

@@ -24,8 +24,7 @@ export class AlgoritmoGenetico {
         }));
     }
 
-    avaliacao() {
-        const corAlvo = { r: 255, g: 165, b: 0 };
+    avaliacao(corAlvo: { r: number, g: number, b: number }) {
     
         const populacao = this.ultimaPopulacao.map(individuo => {
             const distancia = Math.sqrt(

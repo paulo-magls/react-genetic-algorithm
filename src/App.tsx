@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { AlgoritmoGenetico } from './models/AlgoritmoGenetico';
 import PopulationControls from './components/PopulationControls';
 import PopulationDisplay from './components/PopulationDisplay';
+import { convertToRgb } from './helpers/helpers';
 import { Besouro } from './models/Besouro';
 import classes from './App.module.css';
 
 function App() {
+  const [meta, setMeta] = useState('#ff0000');
   const [tamanho, setTamanho] = useState('');
   const [geracoes, setGeracoes] = useState('');
   const [taxa, setTaxa] = useState('');
@@ -21,12 +23,13 @@ function App() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsGenerating(true);
 
+    const META = convertToRgb(meta);
     const TAMANHO = +tamanho < 5 ? 0 : +tamanho;
     const GERACOES = +geracoes < 1 ? 10 : +geracoes;
     const TAXA = +taxa < 0 ? 0 : +taxa/100;
 
     const ag = new AlgoritmoGenetico(TAMANHO || 5);
-    ag.avaliacao();
+    ag.avaliacao(META);
 
     setPopulacoes([ag.ultimaPopulacao]);
 
@@ -50,7 +53,7 @@ function App() {
 
       // Gera nova população com a elite e os filhos
       ag.gerarNovaPopulacao(filhos);
-      ag.avaliacao();
+      ag.avaliacao(META);
 
       setPopulacoes((prevPopulacoes) => [
         ...prevPopulacoes,
@@ -66,6 +69,8 @@ function App() {
   return (
     <div className={classes.app}>
       <PopulationControls
+        meta={meta}
+        setMeta={setMeta}
         tamanho={tamanho}
         setTamanho={setTamanho}
         geracoes={geracoes}
