@@ -23,7 +23,7 @@
 }
 
 .population_display small {
-    font-size: 1rem;
+    font-size: .8rem;
     margin-left: .5rem;
     background-color: rgb(21, 21, 21);
     border-radius: 15px;
