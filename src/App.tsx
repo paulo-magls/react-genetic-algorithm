@@ -32,8 +32,8 @@ function App() {
 
     for (let i = 1; i <= GERACOES; i++) {
 
-      const elite = Math.ceil(ag.tamanhoPopulacao / 3);
-      const filhosNecessarios = ag.tamanhoPopulacao - elite;
+      const elite = Math.ceil(ag.ultimaPopulacao.length / 3);
+      const filhosNecessarios = ag.ultimaPopulacao.length - elite;
 
       const filhos: Besouro[] = [];
 

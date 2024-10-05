@@ -15,10 +15,6 @@ export class AlgoritmoGenetico {
         return this.#populacoes[this.#populacoes.length - 1];
     }
 
-    get tamanhoPopulacao(): number {
-        return this.ultimaPopulacao.length;
-    }
-
     private iniciaPopulacao(tamanhoPopulacao: number): Besouro[] {
         return Array.from({ length: tamanhoPopulacao }, () => ({
             r: Math.floor(Math.random() * 256),
@@ -38,22 +34,22 @@ export class AlgoritmoGenetico {
 
     selecao(): [Besouro, Besouro] {
         const populacao = this.ultimaPopulacao;
-        const somaAptidao = populacao.reduce((acc, { aptidao }) => acc + aptidao, 0);
-
-        const selecionarIndividuo = () => {
-            let somaParcial = 0;
-            const valorRoleta = Math.random() * somaAptidao;
-            return populacao.find(({ aptidao }) => (somaParcial += aptidao) >= valorRoleta) || populacao[populacao.length - 1];
-        };
-
-        const pai1 = selecionarIndividuo();
-        let pai2;
-        do {
-            pai2 = selecionarIndividuo();
-        } while (pai1 === pai2);
-
-        return [pai1, pai2];
-    }
+        const tamanhoTorneio = Math.ceil(populacao.length / 3);
+    
+        const competidores = [];
+    
+        for (let i = 0; i < tamanhoTorneio; i++) {
+            const indiceAleatorio = Math.floor(Math.random() * populacao.length);
+            competidores.push(populacao[indiceAleatorio]);
+        }
+    
+        // Ordena os competidores pela aptidão e retorna os dois melhores
+        const [pai1, pai2] = competidores
+            .sort((a, b) => b.aptidao - a.aptidao)
+            .slice(0, 2); // Pega os dois primeiros competidores com maior aptidão
+    
+        return [pai1, pai2]; // Retorna como uma tupla
+    }    
 
     crossover(pai1: Besouro, pai2: Besouro): [Besouro, Besouro] {
         return [
@@ -112,9 +108,11 @@ export class AlgoritmoGenetico {
     }        
 
     private selecionarElite(): Besouro[] {
-        return this.ultimaPopulacao
+        const populacao = this.ultimaPopulacao;
+        
+        return populacao
             .sort((a, b) => b.aptidao - a.aptidao)
-            .slice(0, Math.ceil(this.tamanhoPopulacao / 3));
+            .slice(0, Math.ceil(populacao.length / 3));
     }
 
     gerarNovaPopulacao(filhos: Besouro[]) {
