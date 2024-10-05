@@ -7,29 +7,20 @@ interface PopulationDisplayProps {
     populacao: Besouro[];
 }
 
-const PopulationDisplay: React.FC<PopulationDisplayProps> = ({ populacao }) => {
-    return (
-        <div className={classes.population_display}>
-            {populacao.map((individuo, index) => {
-                // Criação da string de cor RGB a partir dos valores individuais
-                const rgbColor = `rgb(${individuo.r}, ${individuo.g}, ${individuo.b})`;
-
-                return (
-                    <div key={index}>
-                        <div style={{ backgroundColor: rgbColor }}>
-                            <img src={besouro} alt="Besouro" />
-                        </div>
-                        
-                        <small>
-                            RGB({individuo.r}, {individuo.g}, {individuo.b})
-                            <br></br>
-                            Aptidão: {individuo.aptidao.toFixed(5).replace('.', ',')}
-                        </small>
-                    </div>
-                );                
-            })}
-        </div>
-    );
-};
+const PopulationDisplay: React.FC<PopulationDisplayProps> = ({ populacao }) => (
+    <div className={classes.population_display}>
+        {populacao.map(({ r, g, b, aptidao }, index) => (
+            <div key={index}>
+                <div style={{ backgroundColor: `rgb(${r}, ${g}, ${b})` }}>
+                    <img src={besouro} alt="Besouro" />
+                </div>
+                <small>
+                    RGB({r}, {g}, {b})<br />
+                    Aptidão: {aptidao.toFixed(5).replace('.', ',')}
+                </small>
+            </div>
+        ))}
+    </div>
+);
 
 export default PopulationDisplay;
