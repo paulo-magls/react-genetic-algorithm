@@ -76,10 +76,11 @@ export class AlgoritmoGenetico {
         }
         return individuo;
     }
-    
 
     gerarNovaPopulacao(filhos: Besouro[]): void {
-        const elite: Besouro[] = this.ultimaPopulacao.slice(0, Math.ceil(this.ultimaPopulacao.length / 3));
+        const elite: Besouro[] = this.ultimaPopulacao
+            .sort((a, b) => b.aptidao - a.aptidao)
+            .slice(0, Math.ceil(this.ultimaPopulacao.length / 3));
         this.#populacoes.push([...elite, ...filhos]);
     }
 }
