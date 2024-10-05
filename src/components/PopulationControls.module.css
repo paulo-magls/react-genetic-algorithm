@@ -12,3 +12,11 @@
         border-radius: 10px;
     }
 }
+
+@media (max-width: 768px) {
+    .population_controls {
+        p > label {
+            font-size: 1.5rem;
+        }
+    }
+}
