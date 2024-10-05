@@ -32,7 +32,7 @@ const PopulationControls: React.FC<PopulationControlsProps> = ({
                 type='number'
                 value={tamanho}
                 min='5'
-                placeholder='Valor mínimo: 5'
+                placeholder='Mínimo: 5 (Padrão: 5)'
                 onChange={(e) => setTamanho(e.target.value)}
                 disabled={isGenerating}
             />
@@ -45,7 +45,7 @@ const PopulationControls: React.FC<PopulationControlsProps> = ({
                 type='number'
                 value={geracoes}
                 min='1'
-                placeholder='Valor mínimo: 1'
+                placeholder='Mínimo: 1 (Padrão: 10)'
                 onChange={(e) => setGeracoes(e.target.value)}
                 disabled={isGenerating}
             />
