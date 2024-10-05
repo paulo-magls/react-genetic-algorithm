@@ -25,12 +25,22 @@ export class AlgoritmoGenetico {
     }
 
     avaliacao() {
-        const populacao = this.ultimaPopulacao.map(individuo => ({
-            ...individuo,
-            aptidao: (individuo.r + individuo.g + individuo.b) / 765,
-        }));
+        const corAlvo = { r: 255, g: 165, b: 0 };
+    
+        const populacao = this.ultimaPopulacao.map(individuo => {
+            const distancia = Math.sqrt(
+                Math.pow(individuo.r - corAlvo.r, 2) +
+                Math.pow(individuo.g - corAlvo.g, 2) +
+                Math.pow(individuo.b - corAlvo.b, 2)
+            );
+            return {
+                ...individuo,
+                aptidao: 1 - distancia / (Math.sqrt(3 * Math.pow(255, 2)))
+            };
+        });
+    
         this.#populacoes[this.#populacoes.length - 1] = populacao;
-    }
+    }    
 
     selecao(): [Besouro, Besouro] {
         const populacao = this.ultimaPopulacao;

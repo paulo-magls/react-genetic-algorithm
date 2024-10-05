@@ -25,6 +25,8 @@ const PopulationControls: React.FC<PopulationControlsProps> = ({
     <div className={classes.population_controls}>
         <h1>Genetic Algorithm Visualizer</h1>
 
+        <p>Meta: RGB(255, 165, 0) <input type='color' value='#ffa500' disabled/></p>
+
         <p>
             <label htmlFor='tamanho'>Tamanho da População: </label>
             <input
