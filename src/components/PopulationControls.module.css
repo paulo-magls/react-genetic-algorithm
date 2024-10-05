@@ -16,7 +16,7 @@
 @media (max-width: 768px) {
     .population_controls {
         p > label {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
     }
 }
